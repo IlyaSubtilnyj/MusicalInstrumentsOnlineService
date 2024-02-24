@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Def;
 
 use App\Validation\Requirement as ParamRules;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class dController extends AbstractController
         ]);
     }
 
-    #[Route('/dp/{param?}', condition: 'service(\'route_checker\').check(request)', requirements: ['param' => ParamRules::DIGITS])]
+    #[Route('/dp/{param?}', requirements: ['param' => ParamRules::DIGITS])]
     public function dp(TranslatorInterface $translator, ?int $param) : Response {
         $translated = $translator->trans('Symfony');
         return new Response($translated);

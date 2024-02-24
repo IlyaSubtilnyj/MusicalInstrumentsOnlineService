@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Def;
 
 use App\Entity\Dummy as Entity;
 use Doctrine\ORM\EntityManagerInterface;

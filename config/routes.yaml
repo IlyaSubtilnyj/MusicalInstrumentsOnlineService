@@ -1,12 +1,14 @@
 controllers:
     resource:
-        path: '../src/Controller/'
-        namespace: 'App\Controller'
+        path: '../src/Controller/Def'
+        namespace: 'App\Controller\Def'
     type: attribute
-    exclude: '../src/Controller/{dController.php}'
+    exclude: '../src/Controller/Def/{dController.php}'
 
 controllers_api:
     resource: 
       path: '../src/Controller/Api'
       namespace: 'App\Controller\Api'
+    prefix: '/api'
+    name_prefix: api_
     type: attribute
