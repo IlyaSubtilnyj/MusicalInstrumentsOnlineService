@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <ul class="nav nav-tabs nav-justified" id="categories">
+    {% for category in categories %}
+      <li class="nav-item" id="category{{ loop.index0 }}">
+        <a id="tab{{ loop.index0 }}" class="nav-link {% if loop.first %} active show {% endif %}" data-toggle="tab" href="#tab-il{{ loop.index0 }}">{{ category.name }}</a>
+      </li>
+    {% else %}
+      <li class="nav-item"><em>no instruments found</em></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container tab-content instrument-list">
+  {% for category in categories %}
+    <div class="col tab-pane fade {% if loop.first %} active in show {% endif %}">
+      <div id="tab-il{{ loop.index0 }}" class="row row-cols-md-2 g-4">
+
+      </div>
+    </div>
+  {% else %}
+    <p>no instruments found</p>
+  {% endfor %}
+</div>
+
+<div id="loadingOverlay">
+  <span class="loadingText">Loading...</span>
+</div>
+
+<style>
+
+/* Style the navigation tabs */
+.nav-tabs {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.nav-item {
+    margin-bottom: -1px;
+}
+
+.nav-link {
+    color: #495057;
+    border: 1px solid transparent;
+    border-radius: 0;
+}
+
+.nav-link.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* Style the tab content */
+.tab-pane {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-top: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 20px;
+}
+
+  #loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Or 100vh */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Start with opacity 0 */
+  transition: opacity 0.3s ease; /* Smooth transition effect */
+}
+.loadingText {
+    color: white;
+    font-size: 24px;
+}
+</style>
+
+<script>
+
+    function bindClickHandler(item, idx) {
+      item.addEventListener('click', function() {
+        document.getElementById('loadingOverlay').style.display = 'flex';
+        setTimeout(() => {
+            document.getElementById('loadingOverlay').style.opacity = '1';
+        }, 10); // Delay for smoother transition
+        
+        getInstruments('tab-il' + idx).then(result => {
+          document.getElementById('loadingOverlay').style.opacity = '0';
+          setTimeout(() => {
+              document.getElementById('loadingOverlay').style.display = 'none';
+          }, 300); // Delay for smoother transition
+        });
+
+      }, {once: true});
+    }
+
+    // The function to be executed on page load
+    function loadedFunction() {
+      const listCategories = document.querySelectorAll('#categories li');
+      listCategories.forEach((category, cId) => bindClickHandler(category, cId));
+
+      const urlParts = new URL(window.location.href);
+      const fragmentIdentifier = urlParts.hash.slice(1); // Remove leading '#'
+      console.log(`Fragment identifier: ${fragmentIdentifier}`);
+
+      //document.getElementById(fragmentIdentifier).dispatchEvent(new MouseEvent('click'));
+      document.getElementById('category0').dispatchEvent(new MouseEvent('click'));
+    }
+
+    async function getInstruments(elementId) {
+      let res = await fetch(`{{ path('api.instruments.index') }}`);
+      let instruments = await res.json();
+
+      instruments.forEach((instrument) => {
+        
+        /**
+         * TODO: install fosjsroutingbundle and fix it
+        */
+        var url = "{{ path('instruments.show', {'id': 'instrument_id'}) }}"; 
+        url = url.replace("instrument_id", instrument.id);
+
+        document.getElementById(elementId).innerHTML += `
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">${instrument.name}</h5>
+            <p class="card-text">${instrument.description}</p>
+            <a href="${url}" class="btn btn-primary">Подробнее</a>
+          </div>
+        </div>
+        `;
+      });
+
+    }
+
+    // Attach the function to the DOMContentLoaded event
+    document.addEventListener('DOMContentLoaded', loadedFunction);
+
+</script>
+
+{% endblock %}

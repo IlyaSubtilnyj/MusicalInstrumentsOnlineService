@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/instruments', name: 'instrument_')]
+#[Route('/instruments', name: 'instruments.')]
 class InstrumentsApiController extends AbstractController
 {
 
@@ -24,8 +24,8 @@ class InstrumentsApiController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/', name: 'show_all', methods: 'GET')]
-    public function show_all(): Response {
+    #[Route('/', name: 'index', methods: 'GET')]
+    public function index(): Response {
         $qb = $this->entityManager->createQueryBuilder();
         $qb->select('i', 'c')
             ->from(Entity::class, 'i')

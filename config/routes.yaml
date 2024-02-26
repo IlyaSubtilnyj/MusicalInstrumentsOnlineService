@@ -10,5 +10,5 @@ controllers_api:
       path: '../src/Controller/Api'
       namespace: 'App\Controller\Api'
     prefix: '/api'
-    name_prefix: api_
+    name_prefix: api.
     type: attribute
