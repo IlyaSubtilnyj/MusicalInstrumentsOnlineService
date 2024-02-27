@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/instruments', name: 'instruments.')]
+#[Route('/instruments', name: 'instruments.', options: ['expose' => true])]
 class InstrumentsApiController extends AbstractController
 {
 

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/instruments', name: 'instruments.')]
+#[Route('/instruments', name: 'instruments.', options: ['expose' => true])]
 class InstrumentsController extends AbstractController
 {
 

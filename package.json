@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "fos-router": "file:vendor/friendsofsymfony/jsrouting-bundle/Resources"
+  }
+}
