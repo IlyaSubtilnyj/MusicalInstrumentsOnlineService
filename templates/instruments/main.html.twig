@@ -2,27 +2,31 @@
 
 {% block body %}
 
-<div class="container-flex">
-  <ul class="nav nav-tabs nav-justified" id="categories">
+<div class="container instrument-menu">
+  <ul id="categories" class="nav nav-tabs /*nav-justified*/">
     {% for category in categories %}
-      <li class="nav-item" id="category{{ loop.index0 }}">
-        <a id="tab{{ loop.index0 }}" class="nav-link {% if loop.first %} active show {% endif %}" data-toggle="tab" href="#tab-il{{ loop.index0 }}">{{ category.name }}</a>
+      <li id="category-{{ loop.index0 }}" class="nav-item">
+        <a id="category-tab-{{ loop.index0 }}" class="nav-link" href="#category-tab-{{ loop.index0 }}-placeholder" data-toggle="tab">
+          {{ category.name }}
+        </a>
       </li>
     {% else %}
-      <li class="nav-item"><em>no instruments found</em></li>
+      <li class="nav-item"><em>No category</em></li>
     {% endfor %}
   </ul>
 </div>
 
-<div class="container-flex tab-content instrument-list">
+<div class="instrument-list container tab-content">
   {% for category in categories %}
-    <div class="col tab-pane fade {% if loop.first %} active in show {% endif %}">
-      <div id="tab-il{{ loop.index0 }}" class="row row-cols-md-2 g-4">
-
+    <div id="category-tab-{{ loop.index0 }}-placeholder" class="instrument-category-tab tab-pane fade">
+      <div class="container-flex">
+        <div id="instrument-container-{{ loop.index0 }}" class="instrument-container row row-cols-2">
+          <!--instrument card with information-->
+        </div>
       </div>
-    </div>
+    </div>    
   {% else %}
-    <p>no instruments found</p>
+    <span>No categories are found</span>
   {% endfor %}
 </div>
 
@@ -30,118 +34,31 @@
   <span class="loadingText">Loading...</span>
 </div>
 
-<style>
+<link rel="stylesheet" href="/css/instruments.main.css">
 
-/* Style the navigation tabs */
-.nav-tabs {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.nav-item {
-    margin-bottom: -1px;
-}
-
-.nav-link {
-    color: #495057;
-    border: 1px solid transparent;
-    border-radius: 0;
-}
-
-.nav-link.active {
-    background-color: #007bff;
-    color: #fff;
-    border-color: #007bff;
-}
-
-/* Style the tab content */
-.tab-pane {
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-top: none;
-}
-
-.tab-pane.active {
-    display: block;
-}
-
-.row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 20px;
-}
-
-  #loadingOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* Or 100vh */
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  opacity: 0; /* Start with opacity 0 */
-  transition: opacity 0.3s ease; /* Smooth transition effect */
-}
-.loadingText {
-    color: white;
-    font-size: 24px;
-}
-</style>
+<script src="/bundles/c/ajax.js">
+</script>
+<script src="/bundles/c/template.js">
+</script>
+<script src="/bundles/c/instruments/main.js">
+</script>
 
 <script>
+  /**
+   * Fill data into html
+  */
+  async function getInstruments(instContId) {
+    let container = document.getElementById(instContId);
+    const instruments = await ajax(`{{ path('api.instruments.index') }}`);
+    const instCardTmpl = `{{ include('instruments/components/_instrument_card.html.twig') }}`;
 
-    function bindClickHandler(item, idx) {
-      item.addEventListener('click', function() {
-        document.getElementById('loadingOverlay').style.display = 'flex';
-        setTimeout(() => {
-            document.getElementById('loadingOverlay').style.opacity = '1';
-        }, 10); // Delay for smoother transition
-        
-        getInstruments('tab-il' + idx).then(result => {
-          document.getElementById('loadingOverlay').style.opacity = '0';
-          setTimeout(() => {
-              document.getElementById('loadingOverlay').style.display = 'none';
-          }, 300); // Delay for smoother transition
-        });
+    instruments.forEach((instrument) => {
+      instrument.show = Routing.generate('instruments.show', {id: instrument.id});
+      container.innerHTML += completeTemplate(instCardTmpl, {instrument});
+    });
+  }
 
-      }, {once: true});
-    }
-
-    // The function to be executed on page load
-    function loadedFunction() {
-      const listCategories = document.querySelectorAll('#categories li');
-      listCategories.forEach((category, cId) => bindClickHandler(category, cId));
-
-      const urlParts = new URL(window.location.href);
-      const fragmentIdentifier = urlParts.hash.slice(1); // Remove leading '#');
-
-      //document.getElementById(fragmentIdentifier).dispatchEvent(new MouseEvent('click'));
-      document.getElementById('category0').dispatchEvent(new MouseEvent('click'));
-    }
-
-    async function getInstruments(elementId) {
-      let res = await fetch(`{{ path('api.instruments.index') }}`);
-      let instruments = await res.json();
-
-      const cardTemplate = `{{ include('instruments/components/_instrument_card.html.twig') }}`;
-      instruments.forEach((instrument) => {
-
-        /*ToDo: access instrumrnt through object variable*/
-        instrument.show = Routing.generate('instruments.show', {id: instrument.id});
-        document.getElementById(elementId).innerHTML += cardTemplate.replaceAll(/(\w+)\.(name|description|show)/g, (template, object, field) => {
-          return instrument[field];
-        });
-
-      });
-    }
-
-    // Attach the function to the DOMContentLoaded event
-    document.addEventListener('DOMContentLoaded', loadedFunction);
-
+  document.addEventListener('DOMContentLoaded', loadedFunction);
 </script>
 
 {% endblock %}
