@@ -2,28 +2,24 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\BrandRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'categories')]
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category
+#[ORM\Table(name: 'brands')]
+#[ORM\Entity(repositoryClass: BrandRepository::class)]
+class Brand
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(name: 'ctg_id', type: 'integer')]
+    #[ORM\Column(name: 'brnd_id', type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(name: 'ctg_name', type: 'string', length: 255)]
+    #[ORM\Column(name: 'brnd_name', type: 'string', length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(name: 'ctg_description', type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
-
-    #[ORM\OneToMany(targetEntity: Model::class, mappedBy: 'category')]
+    #[ORM\OneToMany(targetEntity: Model::class, mappedBy: 'brand')]
     private Collection $models;
 
     public function __construct()
@@ -48,18 +44,6 @@ class Category
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Model>
      */
@@ -72,7 +56,7 @@ class Category
     {
         if (!$this->models->contains($model)) {
             $this->models->add($model);
-            $model->setCategory($this);
+            $model->setBrand($this);
         }
 
         return $this;
@@ -82,8 +66,8 @@ class Category
     {
         if ($this->models->removeElement($model)) {
             // set the owning side to null (unless already changed)
-            if ($model->getCategory() === $this) {
-                $model->setCategory(null);
+            if ($model->getBrand() === $this) {
+                $model->setBrand(null);
             }
         }
 

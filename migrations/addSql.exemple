@@ -1,0 +1,31 @@
+class YourMigration extends AbstractMigration
+{
+    public function up(Schema $schema): void
+    {
+        $yourTableName = 'your_table';
+        $yourForeignKeyColumn = 'your_foreign_key_column';
+        
+        $this->addSql(
+            sprintf(
+                'ALTER TABLE %s DROP INDEX IDX_%s',
+                $yourTableName,
+                $yourForeignKeyColumn
+            )
+        );
+
+        $this->addSql(
+            sprintf(
+                'ALTER TABLE %s DROP FOREIGN KEY %s, ADD CONSTRAINT %s FOREIGN KEY ...',
+                $yourTableName,
+                $yourForeignKeyName,
+                $yourForeignKeyName
+            )
+        );
+        
+    }
+
+    public function down(Schema $schema): void
+    {
+        // Downgrade migration logic
+    }
+}

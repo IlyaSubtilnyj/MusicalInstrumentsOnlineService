@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\ManyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ManyRepository::class)]
+//#[ORM\Entity(repositoryClass: ManyRepository::class)]
 class Many
 {
     #[ORM\Id]

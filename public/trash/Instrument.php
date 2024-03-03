@@ -6,8 +6,8 @@ use App\Repository\InstrumentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'instruments')]
-#[ORM\Entity(repositoryClass: InstrumentRepository::class)]
+///#[ORM\Table(name: 'instruments')]
+//#[ORM\Entity(repositoryClass: InstrumentRepository::class)]
 class Instrument
 {
     #[ORM\Id]

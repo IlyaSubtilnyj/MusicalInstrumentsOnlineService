@@ -2,8 +2,20 @@
 
 namespace App\DatabaseHelper;
 
+use Doctrine\DBAL\Types\Type;
+use Doctrine\ORM\EntityManagerInterface;
+use App\DBAL\EnumNationType;
+
 class DatabaseHelper
 {
+
+    public function register(EntityManagerInterface $entityManager) 
+    {
+        // Register the custom Doctrine types
+        //Type::addType('enumnation', EnumNationType::class);
+        //$entityManager->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('enumnation', 'enumnation');
+    }
+
     /**
      * Current database platform
      */
