@@ -48,8 +48,8 @@
    * Fill data into html
   */
   async function getInstruments(instContId) {
+    const instruments = await ajax(Routing.generate('api.instruments.show_with_categoty', {id: 3}));
     let container = document.getElementById(instContId);
-    const instruments = await ajax(`{{ path('api.instruments.index') }}`);
     const instCardTmpl = `{{ include('instruments/components/_instrument_card.html.twig') }}`;
 
     instruments.forEach((instrument) => {

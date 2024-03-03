@@ -9,13 +9,18 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Dummy with id {{ entity.id }}!</h1>
-    <h2>Dummy with name {{ entity.name }}</h2>
+    <h1>Dummy with id!</h1>
+    <h2>Dummy with name</h2>
 
     This friendly message is coming from:
     <ul>
         <li>Your controller at <code>/var/www/music/src/Controller/DummyController.php</code></li>
         <li>Your template at <code>/var/www/music/templates/dummy/index.html.twig</code></li>
     </ul>
+
+    {% for many in manies %}
+        {{ many.id }} {# Example: Accessing the "id" property of the Many entity #}
+        {# Perform other operations with the Many entity #}
+    {% endfor %}
 </div>
 {% endblock %}

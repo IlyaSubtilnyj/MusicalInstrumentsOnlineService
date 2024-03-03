@@ -19,7 +19,7 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(targetEntity: Instrument::class, mappedBy: 'category_id')]
+    #[ORM\OneToMany(targetEntity: Instrument::class, mappedBy: 'category')]
     private Collection $instruments;
 
     public function __construct()
