@@ -21,6 +21,8 @@ class YourMigration extends AbstractMigration
                 $yourForeignKeyName
             )
         );
+
+        $this->addSql('ALTER TABLE my_entity_join_table RENAME INDEX idx_old_name TO idx_new_name');
         
     }
 

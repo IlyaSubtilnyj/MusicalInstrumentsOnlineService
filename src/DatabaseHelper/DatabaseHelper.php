@@ -24,7 +24,8 @@ class DatabaseHelper
         $url = $_ENV['DATABASE_URL'];
         if (preg_match('/^(.*):\/\//', $url, $matches)) {
             $beforeColonSlashSlash = $matches[1];
-            return $beforeColonSlashSlash;
+            //return $beforeColonSlashSlash;
+            return 'oracle';
         } else {
             return "No database configuration found.";
         }

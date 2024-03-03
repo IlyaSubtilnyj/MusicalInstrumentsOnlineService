@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ModelRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,6 +34,14 @@ class Model
     #[ORM\ManyToOne(inversedBy: 'models')]
     #[ORM\JoinColumn(name: 'mdl_brand_id', referencedColumnName: 'brnd_id')]
     private ?Brand $brand = null;
+
+    #[ORM\OneToMany(targetEntity: Instance::class, mappedBy: 'model')]
+    private Collection $instances;
+
+    public function __construct()
+    {
+        $this->instances = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,6 +92,36 @@ class Model
     public function setBrand(?Brand $brand): static
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Instance>
+     */
+    public function getInstances(): Collection
+    {
+        return $this->instances;
+    }
+
+    public function addInstance(Instance $instance): static
+    {
+        if (!$this->instances->contains($instance)) {
+            $this->instances->add($instance);
+            $instance->setModel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInstance(Instance $instance): static
+    {
+        if ($this->instances->removeElement($instance)) {
+            // set the owning side to null (unless already changed)
+            if ($instance->getModel() === $this) {
+                $instance->setModel(null);
+            }
+        }
 
         return $this;
     }
