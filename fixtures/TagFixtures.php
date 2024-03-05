@@ -6,17 +6,24 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use App\Entity\Tag;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class TagFixtures extends GroupInjectionFixture
+class TagFixtures extends DomainFromArrayFixture implements DependentFixtureInterface
 {
 
-    public function load(ObjectManager $manager): void
-    {
-        // $product = new Product();
+    use JsonFixturesTrait;
 
-        // $manager->persist($product);
-        
-        $manager->flush();
+    public function __construct()
+    {
+        $this->a_entities = $this->fromJson();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            CategoryFixtures::class,
+        ];
     }
 
 }

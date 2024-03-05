@@ -6,11 +6,15 @@ use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Trait\DomainPropertyFromArrayTrait;
 
 #[ORM\Table(name: 'tags')]
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag
 {
+
+    use DomainPropertyFromArrayTrait;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(name: 'tg_id', type: 'integer')]

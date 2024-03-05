@@ -44,6 +44,7 @@ final class Version20240303142333 extends AbstractMigration
         $this->addSql('ALTER TABLE meta_category_specs ADD CONSTRAINT FK_3C3D52E711172A0C FOREIGN KEY (cs_category_id) REFERENCES categories (ctg_id)');
         $this->addSql('ALTER TABLE models ADD CONSTRAINT FK_E4D630095FF5BEEC FOREIGN KEY (mdl_category_id) REFERENCES categories (ctg_id)');
         $this->addSql('ALTER TABLE models ADD CONSTRAINT FK_E4D630096AC22B0B FOREIGN KEY (mdl_brand_id) REFERENCES brands (brnd_id)');
+
     }
 
     public function down(Schema $schema): void

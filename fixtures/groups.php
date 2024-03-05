@@ -48,4 +48,11 @@ return [
             'z-index0',
             'wave-1'
         ],
+    CategoryFixtures::class =>
+        [
+            'core',
+            'undependant',
+            'z-index0',
+            'wave-1'
+        ],
 ];

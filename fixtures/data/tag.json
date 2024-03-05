@@ -1,0 +1,82 @@
+[
+    {
+      "label": "Guitar",
+      "description": "Musical instrument with six strings."
+    },
+    {
+      "label": "Piano",
+      "description": "Keyboard instrument with black and white keys."
+    },
+    {
+      "label": "Drums",
+      "description": "Percussion instrument played with sticks or hands."
+    },
+    {
+      "label": "Violin",
+      "description": "Four-stringed bowed instrument."
+    },
+    {
+      "label": "Saxophone",
+      "description": "Woodwind instrument with a reed mouthpiece."
+    },
+    {
+      "label": "Trumpet",
+      "description": "Brass instrument played by buzzing the lips."
+    },
+    {
+      "label": "Flute",
+      "description": "Woodwind instrument played by blowing across a hole."
+    },
+    {
+      "label": "Bass Guitar",
+      "description": "Electric or acoustic guitar with lower pitch range."
+    },
+    {
+      "label": "Cello",
+      "description": "Large string instrument played with a bow."
+    },
+    {
+      "label": "Clarinet",
+      "description": "Woodwind instrument with a single reed mouthpiece."
+    },
+    {
+      "label": "Ukulele",
+      "description": "Small guitar-like instrument with four strings."
+    },
+    {
+      "label": "Harmonica",
+      "description": "Small wind instrument played by mouth."
+    },
+    {
+      "label": "Xylophone",
+      "description": "Percussion instrument with tuned wooden bars."
+    },
+    {
+      "label": "Banjo",
+      "description": "String instrument with a round body and a long neck."
+    },
+    {
+      "label": "Tambourine",
+      "description": "Hand-held percussion instrument with jingling metal discs."
+    },
+    {
+      "label": "Accordion",
+      "description": "Portable instrument with bellows and a keyboard."
+    },
+    {
+      "label": "Maracas",
+      "description": "Pair of handheld percussion instruments."
+    },
+    {
+      "label": "Harp",
+      "description": "Large string instrument played by plucking."
+    },
+    {
+      "label": "Synthesizer",
+      "description": "Electronic musical instrument that produces various sounds."
+    },
+    {
+      "label": "Bagpipes",
+      "description": "Wind instrument with multiple pipes and a bag for air."
+    }
+]

@@ -6,13 +6,12 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Category as Entity;
 
-class CategoryFixtures extends Fixture
+class CategoryFixtures extends DomainFromArrayFixture
 {
-    private ?array $category_array = null;
 
     public function __construct() 
     {
-        $this->category_array = array(
+        $this->a_entities = array(
             array('name' => 'String', 'description' => 'Instruments that produce sound through vibrating strings.'),
             array('name' => 'Brass', 'description' => 'Instruments typically made of brass or other metal alloys.'),
             array('name' => 'Woodwind', 'description' => 'Instruments that produce sound by blowing air through a wooden or metal mouthpiece.'),
@@ -26,18 +25,5 @@ class CategoryFixtures extends Fixture
         );
         
     }
-
-    public function load(ObjectManager $manager): void
-    {
-
-        foreach($this->category_array as $category)
-        {
-            $manager->persist((new Entity())->setPropertiesFromArray($category));    
-        }
-        
-        $manager->flush();
-        
-    }
-
 
 }

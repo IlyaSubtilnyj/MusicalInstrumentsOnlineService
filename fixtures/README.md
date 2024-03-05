@@ -1,4 +1,4 @@
-Delete fixture changes: $manager->getRepository(Tag::class)->deleteAll();
+Delete fixture changes: $manager->getRepository(Tag::class)->deleteAll(); Alternatively recreate database or any other method.
 Extend custom fixture from GroupInjectionFixture or use GroupInjectionTrait and extends Fixture and implements FixtureGroupInterface.
 
 Apply fixtures like that: 'php bin/console doctrine:fixtures:load --group=core', using group only which are defined in groups.php file of DataFixtures namespace.

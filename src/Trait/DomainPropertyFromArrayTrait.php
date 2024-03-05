@@ -2,6 +2,8 @@
 
 namespace App\Trait;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
+
 trait DomainPropertyFromArrayTrait 
 {
 

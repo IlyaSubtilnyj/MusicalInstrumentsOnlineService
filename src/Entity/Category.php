@@ -11,6 +11,7 @@ use App\Trait\DomainPropertyFromArrayTrait;
 
 #[ORM\Table(name: 'categories')]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNQ_ctg_name',columns: ["ctg_name"])]
 class Category
 {
 

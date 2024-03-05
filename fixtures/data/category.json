@@ -1,0 +1,82 @@
+[
+    {
+      "name": "Guitars",
+      "description": "Category for all types of guitars."
+    },
+    {
+      "name": "Keyboards",
+      "description": "Category for keyboard instruments."
+    },
+    {
+      "name": "Drums",
+      "description": "Category for all types of drums and percussion instruments."
+    },
+    {
+      "name": "String Instruments",
+      "description": "Category for all types of string instruments."
+    },
+    {
+      "name": "Woodwind Instruments",
+      "description": "Category for all types of woodwind instruments."
+    },
+    {
+      "name": "Brass Instruments",
+      "description": "Category for all types of brass instruments."
+    },
+    {
+      "name": "Pianos",
+      "description": "Category for all types of pianos."
+    },
+    {
+      "name": "Bass Guitars",
+      "description": "Category for all types of bass guitars."
+    },
+    {
+      "name": "Percussion Instruments",
+      "description": "Category for all types of percussion instruments."
+    },
+    {
+      "name": "Orchestral Instruments",
+      "description": "Category for all types of orchestral instruments."
+    },
+    {
+      "name": "Synthesizers",
+      "description": "Category for all types of synthesizers and electronic instruments."
+    },
+    {
+      "name": "Amplifiers",
+      "description": "Category for all types of amplifiers and sound equipment."
+    },
+    {
+      "name": "Accessories",
+      "description": "Category for musical instrument accessories and parts."
+    },
+    {
+      "name": "Sheet Music",
+      "description": "Category for sheet music and musical scores."
+    },
+    {
+      "name": "DJ Equipment",
+      "description": "Category for DJ equipment and accessories."
+    },
+    {
+      "name": "Live Sound",
+      "description": "Category for live sound equipment and PA systems."
+    },
+    {
+      "name": "Microphones",
+      "description": "Category for all types of microphones."
+    },
+    {
+      "name": "Recording Equipment",
+      "description": "Category for studio recording equipment."
+    },
+    {
+      "name": "Music Software",
+      "description": "Category for music production software and plugins."
+    },
+    {
+      "name": "Music Books",
+      "description": "Category for books about music and musical theory."
+    }
+]
