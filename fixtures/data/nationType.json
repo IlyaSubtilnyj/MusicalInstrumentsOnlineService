@@ -1,0 +1,22 @@
+[
+    {
+        "name": "country",
+        "description": "Independent entity with defined borders, government, and international recognition"
+    },
+    {
+        "name": "sovereign state",
+        "description": "Self-governing entity with full control over internal and external affairs"
+    },
+    {
+        "name": "dependent territory",
+        "description": "Politically controlled region governed by another country"
+    },
+    {
+        "name": "region",
+        "description": "Geographical area with common features, cultural traits, or political boundaries"
+    },
+    {
+        "name": "other",
+        "description": "Other nation type"
+    }
+]

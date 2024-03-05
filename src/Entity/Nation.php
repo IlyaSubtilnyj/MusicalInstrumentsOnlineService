@@ -6,7 +6,6 @@ use App\Repository\NationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\DBAL\EnumNationType;
 
 #[ORM\Table(name: 'nations')]
 #[ORM\Entity(repositoryClass: NationRepository::class)]
@@ -20,8 +19,9 @@ class Nation
     #[ORM\Column(name: 'ntn_name', type: 'string', length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(name: 'ntn_type', type: 'enumnation')]
-    private ?EnumNationType $type = null;
+    #[ORM\ManyToOne(inversedBy: 'nations')]
+    #[ORM\JoinColumn(name: 'ntn_type_id', referencedColumnName: 'nt_id',  nullable: false)]
+    private ?NationType $type = null;
 
     #[ORM\OneToMany(targetEntity: Manufacturer::class, mappedBy: 'nation')]
     private Collection $manufacturers;

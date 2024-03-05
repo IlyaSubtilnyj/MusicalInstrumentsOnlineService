@@ -26,7 +26,7 @@ abstract class GroupInjectionFixture extends Fixture implements FixtureGroupInte
     {
         if (is_null(self::$groups)) 
         {
-            $mapping = include 'groups.php';
+            $mapping = require_once __DIR__ . '/unrelated/groups.php';
             self::$groups = $mapping[get_called_class()];
         }
             

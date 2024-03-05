@@ -1,7 +1,5 @@
 <?php
 
-namespace DataFixtures;
-
 $groups = array(
     /**
      * For purposes
@@ -37,6 +35,7 @@ $groups = array(
      * For migration stage(see https://github.com/IlyaSubtilnyj/MusicalInstrumentsOnlineService commit history for detail)
     */
     'wave-1'    => 'Created or modified in first migration(wave)',
+    'wave-2'    => '',
     
 );
 
@@ -54,5 +53,13 @@ return [
             'undependant',
             'z-index0',
             'wave-1'
+        ],
+    NationTypeFixtures::class =>
+        [
+            'core',
+            'undependant',
+            'z-index0',
+            'wave-1',
+            'wave-2'
         ],
 ];

@@ -1,8 +1,11 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-        types:
-            enumnation: 'App\DBAL\EnumNationType' #Change it to valid class
+        
+        # Deprecated type, never use enumerations
+        # types:
+        #     enumnation: 'App\DBAL\EnumNationType' #Change it to valid class
+
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'

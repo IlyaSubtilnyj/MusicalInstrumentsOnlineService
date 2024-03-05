@@ -1,0 +1,1 @@
+Enums are deprecated. Tables used instead.
