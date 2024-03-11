@@ -1,6 +1,22 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
+        default_connection:       default
+        connections:
+            default:
+                dbname:           '%env(resolve:DATABASE_NAME)%'
+                user:             root
+                password:         null
+                host:             "%env(resolve:DATABASE_HOST)%"
+                port:             "%env(resolve:DATABASE_PORT)%"
+                server_version:   '8.3'
+            customer:
+                dbname:           '%env(resolve:DATABASE_NAME)%'
+                user:             admin
+                password:         URhwXtwZ34FsB5Hs
+                host:             "%env(resolve:DATABASE_HOST)%"
+                port:             "%env(resolve:DATABASE_PORT)%"
+                server_version:   '8.3'
+        # url: '%env(resolve:DATABASE_URL)%'
         
         # Deprecated type, never use enumerations
         # types:
@@ -10,24 +26,43 @@ doctrine:
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'
 
-        profiling_collect_backtrace: '%kernel.debug%'
-        use_savepoints: true
+        # profiling_collect_backtrace: '%kernel.debug%'
+        # use_savepoints: true
     orm:
-        auto_generate_proxy_classes: true
-        enable_lazy_ghost_objects: true
-        report_fields_where_declared: true
-        validate_xml_mapping: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
-        mappings:
-            App:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
-        controller_resolver:
-            auto_mapping: false
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    Main:
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'App\Entity'
+                        alias: Main
+            customer:
+                connection: customer
+                mappings:
+                    Customer:
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'App\Entity'
+                        alias: Customer
+
+        # auto_generate_proxy_classes: true
+        # enable_lazy_ghost_objects: true
+        # report_fields_where_declared: true
+        # validate_xml_mapping: true
+        # naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        # auto_mapping: true
+        # mappings:
+        #     App:
+        #         type: attribute
+        #         is_bundle: false
+        #         dir: '%kernel.project_dir%/src/Entity'
+        #         prefix: 'App\Entity'
+        #         alias: App
+        # controller_resolver:
+        #     auto_mapping: false
 
 when@test:
     doctrine:

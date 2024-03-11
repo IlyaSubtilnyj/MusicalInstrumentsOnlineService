@@ -1,5 +1,7 @@
 <?php
 
+namespace DataFixtures\Payload;
+
 $groups = array(
     /**
      * For purposes
@@ -40,21 +42,21 @@ $groups = array(
 );
 
 return [
-    TagFixtures::class => 
+    \DataFixtures\TagFixtures::class => 
         [
             'core',
             'undependant',
             'z-index0',
             'wave-1'
         ],
-    CategoryFixtures::class =>
+    \DataFixtures\CategoryFixtures::class =>
         [
             'core',
             'undependant',
             'z-index0',
             'wave-1'
         ],
-    NationTypeFixtures::class =>
+    \DataFixtures\NationTypeFixtures::class =>
         [
             'core',
             'undependant',

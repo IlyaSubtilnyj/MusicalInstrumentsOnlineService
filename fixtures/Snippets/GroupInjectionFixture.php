@@ -1,6 +1,6 @@
 <?php
 
-namespace DataFixtures;
+namespace DataFixtures\Snippets;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -26,7 +26,7 @@ abstract class GroupInjectionFixture extends Fixture implements FixtureGroupInte
     {
         if (is_null(self::$groups)) 
         {
-            $mapping = require_once __DIR__ . '/unrelated/groups.php';
+            $mapping = require_once dirname(__DIR__) . '/Payload/groups.php';
             self::$groups = $mapping[get_called_class()];
         }
             

@@ -1,6 +1,6 @@
 <?php
 
-namespace DataFixtures;
+namespace DataFixtures\Snippets;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
 
@@ -13,7 +13,7 @@ trait EntityNameFromFixtureTrait {
     private function getEntityNameFromFixtureName(): string
     {
         $entity_fixture_name = get_called_class();
-        $match_expression = '/^'.__NAMESPACE__.'\\\\(.*)Fixtures/';
+        $match_expression = '/^DataFixtures\\\\(.*)Fixtures/';
         if (preg_match($match_expression, $entity_fixture_name, $matches)) 
         {
             return $matches[1];

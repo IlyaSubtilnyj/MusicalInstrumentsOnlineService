@@ -1,9 +1,11 @@
 <?php
 
-namespace DataFixtures\Fixtures;
+namespace DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use DataFixtures\Snippets\DomainFromArrayFixture;
+use DataFixtures\Snippets\JsonFixturesTrait;
 
 class CategoryFixtures extends DomainFromArrayFixture
 {

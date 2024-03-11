@@ -7,6 +7,14 @@ parameters:
 
 services:
 
+    App\Doctrine\Connection\ConnectionManager:
+        arguments:
+            $connectionRegistry: '@doctrine.dbal.connection_registry'
+
+    App\Doctrine\EntityManager\EntityManagerManager:
+        arguments:
+            $entityManagerRegistry: '@doctrine'
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -22,6 +30,10 @@ services:
             - '../src/Kernel.php'
     DataFixtures\:
         resource: '../fixtures'
+        exclude:
+            - '../fixtures/Payload'
+            - '../fixtures/Data'
+            - '../fixtures/Snippets'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

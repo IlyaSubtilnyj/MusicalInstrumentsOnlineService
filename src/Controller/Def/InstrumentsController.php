@@ -2,46 +2,34 @@
 
 namespace App\Controller\Def;
 
-use App\Entity\Instrument as Entity;
+use App\Controller\BaseController;
+use App\Entity\Instrument;
 use App\Entity\Category;
-use App\Validation\Requirement as ParamRules;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Psr\Log\LoggerInterface;
-use App\DatabaseHelper\DatabaseHelper as DBHelper;
+use App\Validation\Requirement as ParamRules;
+//use Symfony\Contracts\Translation\TranslatorInterface;
+
 
 #[Route('/instruments', name: 'instruments.', options: ['expose' => true])]
-class InstrumentsController extends AbstractController
+class InstrumentsController extends BaseController
 {
-
-    private $entityManager;
-    private $logger;
-    private $dbhelp;
-
-    public function __construct(EntityManagerInterface $entityManager, LoggerInterface $logger, DBHelper $dbhelp)
-    {
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
-        $this->dbhelp = $dbhelp;
-    }
 
     #[Route('/', name: 'main')]
     public function main() : Response
     {
-        //dd($this->dbhelp->getdbplat());
-        $this->logger->info('This is an info message.');
-        $categories = $this->entityManager->getRepository(Category::class)->findAll();
+        //Log instruments page browsing
+        $this->logger->info('Main page has been entered.');
+
+        $entityManager = $this->getUserEntityManager();
+        $categories = $entityManager->getRepository(Category::class)->findAll();
         return $this->render('instruments/main.html.twig', [
             'categories' => $categories,
         ]);
     }
 
     #[Route('/{id}', name: 'show')]
-    public function show(Entity $entity) : Response {
+    public function show(Instrument $entity) : Response {
         dd($entity);
         return $this->render('instruments', [
             'instrument' => $entity,

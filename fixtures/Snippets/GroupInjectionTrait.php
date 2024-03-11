@@ -1,7 +1,6 @@
 <?php
 
-namespace DataFixtures;
-
+namespace DataFixtures\Snippets;
 
 /**
  * Early binding(__CLASS__)
@@ -11,7 +10,7 @@ trait GroupInjectionTrait {
 
     public static function getGroups(): array
     {
-        $mapping = require_once __DIR__ . '/unrelated/groups.php';
+        $mapping = require_once dirname(__DIR__) . '/Payload/groups.php';
         return $mapping[__CLASS__];
     }
 

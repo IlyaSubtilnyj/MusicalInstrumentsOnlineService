@@ -1,6 +1,6 @@
 <?php
 
-namespace DataFixtures;
+namespace DataFixtures\Snippets;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
 
