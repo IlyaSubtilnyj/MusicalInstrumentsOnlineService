@@ -3,17 +3,17 @@
 {% block body %}
 
 <div class="container instrument-menu">
-  <ul id="categories" class="nav nav-tabs /*nav-justified*/">
-    {% for category in categories %}
-      <li id="category-{{ loop.index0 }}" class="nav-item">
-        <a id="category-tab-{{ loop.index0 }}" class="nav-link" href="#category-tab-{{ loop.index0 }}-placeholder" data-toggle="tab">
-          {{ category.name }}
-        </a>
-      </li>
-    {% else %}
-      <li class="nav-item"><em>No category</em></li>
-    {% endfor %}
-  </ul>
+    <ul id="categories" class="nav nav-tabs /*nav-justified*/">
+      {% for category in categories %}
+        <li id="category-{{ loop.index0 }}" class="nav-item">
+          <a id="category-tab-{{ loop.index0 }}" class="nav-link" href="#category-tab-{{ loop.index0 }}-placeholder" data-toggle="tab">
+            {{ category.name }}
+          </a>
+        </li>
+      {% else %}
+        <li class="nav-item"><em>No category</em></li>
+      {% endfor %}
+    </ul>
 </div>
 
 <div class="instrument-list container tab-content">
@@ -59,6 +59,14 @@
   }
 
   document.addEventListener('DOMContentLoaded', loadedFunction);
+
+  const tabsContainer = document.getElementById('categories');
+
+  tabsContainer.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    tabsContainer.scrollLeft += event.deltaY;
+  });
+
 </script>
 
 {% endblock %}

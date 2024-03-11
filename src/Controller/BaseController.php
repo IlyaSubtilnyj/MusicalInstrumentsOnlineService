@@ -43,7 +43,7 @@ class BaseController extends AbstractController
 
     protected function getUserRole(): ?string 
     {
-        return 'ROLE_USER';
+        return 'ROLE_CUSTOMER';
         return $this->getUser()?->getRole();
     }
 

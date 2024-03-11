@@ -11,6 +11,27 @@ doctrine:
                 server_version:   '8.3'
             customer:
                 dbname:           '%env(resolve:DATABASE_NAME)%'
+                user:             customer
+                password:         KNa8MWjnaukb8tcY
+                host:             "%env(resolve:DATABASE_HOST)%"
+                port:             "%env(resolve:DATABASE_PORT)%"
+                server_version:   '8.3'
+            salesperson:
+                dbname:           '%env(resolve:DATABASE_NAME)%'
+                user:             salesperson
+                password:         dWCP3M6wPpCFwdEa
+                host:             "%env(resolve:DATABASE_HOST)%"
+                port:             "%env(resolve:DATABASE_PORT)%"
+                server_version:   '8.3'
+            moderator:
+                dbname:           '%env(resolve:DATABASE_NAME)%'
+                user:             mod
+                password:         DNxnS2eRRkHe8nbY
+                host:             "%env(resolve:DATABASE_HOST)%"
+                port:             "%env(resolve:DATABASE_PORT)%"
+                server_version:   '8.3'
+            admin:
+                dbname:           '%env(resolve:DATABASE_NAME)%'
                 user:             admin
                 password:         URhwXtwZ34FsB5Hs
                 host:             "%env(resolve:DATABASE_HOST)%"
@@ -47,6 +68,22 @@ doctrine:
                         dir: '%kernel.project_dir%/src/Entity'
                         prefix: 'App\Entity'
                         alias: Customer
+            salesperson:
+                connection: salesperson
+                mappings:
+                    Salesperson:
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'App\Entity'
+                        alias: Salesperson
+            moderator:
+                connection: moderator
+                mappings:
+                    Moderator:
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'App\Entity'
+                        alias: Moderator
 
         # auto_generate_proxy_classes: true
         # enable_lazy_ghost_objects: true

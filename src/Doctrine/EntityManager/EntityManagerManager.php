@@ -18,9 +18,11 @@ class EntityManagerManager
     {
         // Switch between entity managers based on user role
         return match ($userRole) {
-            'ROLE_USER'     => $this->entityManagerRegistry->getManager('customer'),
-            'ROLE_ADMIN'    => $this->entityManagerRegistry->getManager('default'),
-            default         => $this->entityManagerRegistry->getManager('default'),
+            'ROLE_CUSTOMER'     => $this->entityManagerRegistry->getManager('customer'),
+            'ROLE_SALESPERSON'  => $this->entityManagerRegistry->getManager('salesperson'),
+            'ROLE_MODERATOR'    => $this->entityManagerRegistry->getManager('moderator'),
+            'ROLE_ADMIN'        => $this->entityManagerRegistry->getManager('default'),
+            default             => $this->entityManagerRegistry->getManager('default'),
         };
     }
 }

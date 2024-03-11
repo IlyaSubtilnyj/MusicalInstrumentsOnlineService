@@ -1,2 +1,2 @@
-For trigger creation and other database object stuff you need to ciinect to database with root priveliges
+For trigger creation and other database object stuff you need to connect to database with root priveliges
 so in .env file DATABASE_UTL string setup something like that: DATABASE_URL="mysql://root:@musicDatabase:3306/music_store"
