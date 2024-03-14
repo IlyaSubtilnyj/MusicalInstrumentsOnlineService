@@ -2,14 +2,14 @@
 
 namespace App\DTO;
 
-use App\Entity\Instrument;
+use App\Entity\Model;
 
 
 class InstrumentDTO {
 
-    private Instrument $instrument;
+    private Model $instrument;
 
-    public function __construct(Instrument $instrument) {
+    public function __construct(Model $instrument) {
         $this->instrument = $instrument;
     }
 

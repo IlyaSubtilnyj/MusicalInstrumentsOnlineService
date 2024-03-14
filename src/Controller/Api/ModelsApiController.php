@@ -2,8 +2,8 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Instrument as Entity;
-use App\Entity\Category as Category;
+use App\Entity\Model;
+use App\Entity\Category;
 use App\Validation\Requirement as ParamRules;
 use App\Trait\JsonEndpointTrait;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,8 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\DTO\InstrumentDTO;
 
-#[Route('/instruments', name: 'instruments.', options: ['expose' => true])]
-class InstrumentsApiController extends AbstractController
+#[Route('/models', name: 'models.', options: ['expose' => true])]
+class ModelsApiController extends AbstractController
 {
 
     use JsonEndpointTrait;
@@ -29,9 +29,9 @@ class InstrumentsApiController extends AbstractController
     #[Route('/{id}', name: 'show_with_categoty', methods: 'GET')]
     public function show_with_category(int $id) {
         $category = $this->entityManager->getRepository(Category::class)->find($id);
-        $instruments = $category->getInstruments();
+        $models = $category->getModels();
         $array = [];
-        foreach($instruments as $instrument) {
+        foreach($models as $instrument) {
             $inst = new InstrumentDTO($instrument);
             array_push($array, $inst->serialize());
         }
@@ -41,9 +41,9 @@ class InstrumentsApiController extends AbstractController
     #[Route('/', name: 'index', methods: 'GET')]
     public function index(): Response {
         $qb = $this->entityManager->createQueryBuilder();
-        $qb->select('i', 'c')
-            ->from(Entity::class, 'i')
-            ->leftJoin('i.category', 'c');
+        $qb->select('m', 'c')
+            ->from(Model::class, 'm')
+            ->leftJoin('m.category', 'c');
         $entities = $qb->getQuery()->getArrayResult();
         return new Response($entities, Response::HTTP_OK);
     }
