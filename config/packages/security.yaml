@@ -39,11 +39,11 @@ security:
         - { path: ^/admin/login, roles: PUBLIC_ACCESS }
 
         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/instruments, roles: ROLE_USER }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/models, roles: ROLE_CUSTOMER }
+        - { path: ^/profile, roles: ROLE_CUSTOMER }
 
     role_hierarchy:
-        ROLE_SALESPERSON:   ROLE_USER
+        ROLE_SALESPERSON:   ROLE_CUSTOMER
         ROLE_MODERATOR:     ROLE_SALESPERSON
         ROLE_ADMIN:         ROLE_MODERATOR
         ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]

@@ -2,34 +2,53 @@
 
 {% block body %}
 
-<div class="py-2">
-  <div class="container instrument-menu">
-      <ul id="categories" class="nav nav-tabs /*nav-justified*/">
-        {% for category in categories %}
-          <li id="category-{{ loop.index0 }}" class="nav-item">
-            <a id="category-tab-{{ loop.index0 }}" class="nav-link" href="#category-tab-{{ loop.index0 }}-placeholder" data-toggle="tab">
-              {{ category.name }}
-            </a>
-          </li>
-        {% else %}
-          <li class="nav-item"><em>No category</em></li>
-        {% endfor %}
-      </ul>
+<div class="my-2">
+  <div class="row">
+    <div class="col">
+
+      <div class="instrument-menu">
+          <ul id="categories" class="nav nav-tabs /*nav-justified*/">
+            {% for category in categories %}
+              <li id="category-{{ loop.index0 }}" class="nav-item">
+                <a id="category-tab-{{ loop.index0 }}" class="nav-link" href="#category-tab-{{ loop.index0 }}-placeholder" data-toggle="tab">
+                  {{ category.name }}
+                </a>
+              </li>
+            {% else %}
+              <li class="nav-item"><em>No category</em></li>
+            {% endfor %}
+          </ul>
+      </div>
+
+    </div>
   </div>
 
-  <div class="instrument-list container tab-content vh-100">
-    {% for category in categories %}
-      <div id="category-tab-{{ loop.index0 }}-placeholder" class="instrument-category-tab tab-pane fade">
-        <div class="container-flex">
-          <div id="model-container-{{ loop.index0 }}" class="instrument-container row row-cols-2">
-            <!--instrument card with information-->
+  <div class="row">
+    <div class="col">
+
+        <div class="instrument-list">
+          <div class="tab-content vh-100">
+            {% for category in categories %}
+              <div id="category-tab-{{ loop.index0 }}-placeholder" class="instrument-category-tab tab-pane fade">
+                
+                  <div class="instrument-container">
+                    <div class="row row-cols-2">
+                      <div id="model-container-{{ loop.index0 }}" class="col">
+                        <!--instrument card with information-->
+                      </div>
+                    </div>
+                  </div>
+                
+              </div>    
+            {% else %}
+              <span>No categories are found</span>
+            {% endfor %}
           </div>
         </div>
-      </div>    
-    {% else %}
-      <span>No categories are found</span>
-    {% endfor %}
+
+    </div>
   </div>
+
 </div>
 
 <div id="loadingOverlay">
@@ -48,17 +67,18 @@
 <script>
 
   const categories = JSON.parse('{{ categories|json_encode|raw }}');
+  Object.freeze(categories);
   /**
    * Fill data into html
   */
   async function getModelsByCategory(catContId) {
     const models = await ajax(Routing.generate('api.models.show_with_categoty', {id: categories[catContId]['id']}));
-    console.log(models);
     let container = document.getElementById('model-container-' + catContId);
     const instCardTmpl = `{{ include('models/components/_model_card.html.twig') }}`;
 
     models.forEach((model) => {
       model.show = Routing.generate('models.show', {id: model.id});
+      Object.freeze(model);
       container.innerHTML += completeTemplate(instCardTmpl, {model});
     });
   }
