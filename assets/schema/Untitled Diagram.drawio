@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-10T12:46:01.129Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0" etag="T10Ttf8Ky_Io5PVaHBxm" version="24.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-10T12:47:16.805Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0" etag="pjOTiIVdvCA4zFoHj9O6" version="24.2.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="5684" dy="2959" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -1479,7 +1479,7 @@
             <mxRectangle width="30" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="wW-30u5kgzMSlfwEfjNo-239" value="instance_id BIGINT UNSIGNED NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" parent="wW-30u5kgzMSlfwEfjNo-237" vertex="1">
+        <mxCell id="wW-30u5kgzMSlfwEfjNo-239" value="rd_instance_id BIGINT UNSIGNED NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" parent="wW-30u5kgzMSlfwEfjNo-237" vertex="1">
           <mxGeometry x="30" width="290" height="50" as="geometry">
             <mxRectangle width="290" height="50" as="alternateBounds" />
           </mxGeometry>
@@ -1505,7 +1505,7 @@
             <mxRectangle width="30" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="wW-30u5kgzMSlfwEfjNo-245" value="status_id TINYINT NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" parent="wW-30u5kgzMSlfwEfjNo-243" vertex="1">
+        <mxCell id="wW-30u5kgzMSlfwEfjNo-245" value="rd_status_id TINYINT NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" parent="wW-30u5kgzMSlfwEfjNo-243" vertex="1">
           <mxGeometry x="30" width="290" height="30" as="geometry">
             <mxRectangle width="290" height="30" as="alternateBounds" />
           </mxGeometry>
