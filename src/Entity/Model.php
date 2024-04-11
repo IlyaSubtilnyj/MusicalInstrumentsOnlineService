@@ -27,6 +27,9 @@ class Model
     #[ORM\Column(name: 'mdl_description', type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(name: 'mdl_is_in_stock', type: Types::BOOLEAN, options: ["default" => 0])]
+    private ?bool $is_in_stock = null;
+
     #[ORM\ManyToOne(inversedBy: 'models')]
     #[ORM\JoinColumn(name: 'mdl_category_id', referencedColumnName: 'ctg_id', nullable: false)]
     private ?Category $category = null;
@@ -38,9 +41,16 @@ class Model
     #[ORM\OneToMany(targetEntity: Instance::class, mappedBy: 'model')]
     private Collection $instances;
 
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'models')]
+    #[ORM\JoinTable(name: 'm2m_model_tags')]
+    #[ORM\JoinColumn(name: 'model_id', referencedColumnName: 'mdl_id')]
+    #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'tg_id')]
+    private Collection $tags;
+
     public function __construct()
     {
         $this->instances = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,6 +132,42 @@ class Model
                 $instance->setModel(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsInStock(): ?bool
+    {
+        return $this->is_in_stock;
+    }
+
+    public function setIsInStock(bool $is_in_stock): static
+    {
+        $this->is_in_stock = $is_in_stock;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): static
+    {
+        $this->tags->removeElement($tag);
 
         return $this;
     }

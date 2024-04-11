@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -28,6 +29,16 @@ class SignUpCustomerFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'max' => 4096,
+                    ]),
+                ],
+            ])
+            ->add('message', TextareaType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a message',
+                    ]),
+                    new Length([
                         'max' => 4096,
                     ]),
                 ],

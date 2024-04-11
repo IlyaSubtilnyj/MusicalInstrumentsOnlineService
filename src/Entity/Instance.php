@@ -36,15 +36,23 @@ class Instance
     #[ORM\JoinColumn(name: 'inst_manufacturer_id', referencedColumnName: 'mnf_id')]
     private ?Manufacturer $manufacturer = null;
 
+    #[ORM\ManyToOne(inversedBy: 'instances')]
+    #[ORM\JoinColumn(name: 'inst_created_by', referencedColumnName: 'usr_id', nullable: false)]
+    private ?User $created_by = null;
+
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'instances')]
     #[ORM\JoinTable(name: 'm2m_instance_tags')]
     #[ORM\JoinColumn(name: 'instance_id', referencedColumnName: 'inst_id')]
     #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'tg_id')]
     private Collection $tags;
 
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'instance')]
+    private Collection $orders;
+
     public function __construct()
     {
         $this->instances = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,6 +140,48 @@ class Instance
     public function removeInstance(Tag $instance): static
     {
         $this->instances->removeElement($instance);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setInstance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getInstance() === $this) {
+                $order->setInstance(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->created_by;
+    }
+
+    public function setCreatedBy(?User $created_by): static
+    {
+        $this->created_by = $created_by;
 
         return $this;
     }

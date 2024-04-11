@@ -9,6 +9,13 @@ doctrine:
                 host:             "%env(resolve:DATABASE_HOST)%"
                 port:             "%env(resolve:DATABASE_PORT)%"
                 server_version:   '8.3'
+            oppressed:
+                dbname:           '%env(resolve:DATABASE_NAME)%'
+                user:             oppressed
+                password:         NZGWYUW98CQLUXAE
+                host:             "%env(resolve:DATABASE_HOST)%"
+                port:             "%env(resolve:DATABASE_PORT)%"
+                server_version:   '8.3'
             customer:
                 dbname:           '%env(resolve:DATABASE_NAME)%'
                 user:             customer

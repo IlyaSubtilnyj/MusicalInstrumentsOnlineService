@@ -10,11 +10,10 @@ use App\Trait\DomainPropertyFromArrayTrait;
 
 #[ORM\Table(name: 'tags')]
 #[ORM\Entity(repositoryClass: TagRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNQ_tg_label', columns: ["tg_label"])]
+#[UniqueEntity(fields: ['label'], message: 'There is already a label with this name')]
 class Tag
 {
-
-    use DomainPropertyFromArrayTrait;
-    
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(name: 'tg_id', type: 'integer')]
@@ -26,8 +25,9 @@ class Tag
     #[ORM\Column(name: 'tg_description', type: 'string', length: 255)]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'tags')]
-    private Collection $categories;
+    #[ORM\ManyToOne(inversedBy: 'tags')]
+    #[ORM\JoinColumn(name: 'tg_created_by', referencedColumnName: 'usr_id')]
+    private ?User $created_by = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'default_tags')]
     private Collection $default_categories;
@@ -35,11 +35,15 @@ class Tag
     #[ORM\ManyToMany(targetEntity: Instance::class, mappedBy: 'tags')]
     private Collection $instances;
 
+    #[ORM\ManyToMany(targetEntity: Model::class, mappedBy: 'tags')]
+    private Collection $models;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->default_categories = new ArrayCollection();
         $this->instances = new ArrayCollection();
+        $this->models = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,6 +151,45 @@ class Tag
     {
         if ($this->instances->removeElement($instance)) {
             $instance->removeInstance($this);
+        }
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->created_by;
+    }
+
+    public function setCreatedBy(?User $created_by): static
+    {
+        $this->created_by = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Model>
+     */
+    public function getModels(): Collection
+    {
+        return $this->models;
+    }
+
+    public function addModel(Model $model): static
+    {
+        if (!$this->models->contains($model)) {
+            $this->models->add($model);
+            $model->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModel(Model $model): static
+    {
+        if ($this->models->removeElement($model)) {
+            $model->removeTag($this);
         }
 
         return $this;

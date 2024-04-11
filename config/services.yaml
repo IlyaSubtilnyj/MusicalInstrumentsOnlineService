@@ -7,9 +7,9 @@ parameters:
 
 services:
 
-    App\Doctrine\Connection\ConnectionManager:
-        arguments:
-            $connectionRegistry: '@doctrine.dbal.connection_registry'
+    #App\Doctrine\Connection\ConnectionManager:
+    #    arguments:
+    #        $connectionRegistry: '@doctrine.dbal.connection_registry'
 
     App\Doctrine\EntityManager\EntityManagerManager:
         arguments:

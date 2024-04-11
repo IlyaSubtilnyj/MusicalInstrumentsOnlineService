@@ -18,6 +18,7 @@ class EntityManagerManager
     {
         // Switch between entity managers based on user role
         return match ($userRole) {
+            'ROLE_OPPRESSED'    => $this->entityManagerRegistry->getManager('oppressed'),
             'ROLE_CUSTOMER'     => $this->entityManagerRegistry->getManager('customer'),
             'ROLE_SALESPERSON'  => $this->entityManagerRegistry->getManager('salesperson'),
             'ROLE_MODERATOR'    => $this->entityManagerRegistry->getManager('moderator'),

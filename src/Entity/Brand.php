@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'brands')]
 #[ORM\Entity(repositoryClass: BrandRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNQ_brnd_name',columns: ["brnd_name"])]
 class Brand
 {
     #[ORM\Id]

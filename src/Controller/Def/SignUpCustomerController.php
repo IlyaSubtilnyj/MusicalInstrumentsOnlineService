@@ -19,11 +19,12 @@ class SignUpCustomerController extends AbstractController
     
         $form = $this->createForm(SignUpCustomerFormType::class);
         $form->handleRequest($request);
-
+        //dd($form->getData());
         if ($form->isSubmitted() && $form->isValid()) {
 
             $regyUser = new User();
 
+            $regyUser->setRoles(['ROLE_CUSTOMER']);
             $regyUser->setEmail($form->get('email')->getData());
             $regyUser->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -31,11 +32,7 @@ class SignUpCustomerController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-
-            /**
-             * Optional. Every reg user has this role and its permissions.
-             * $user->setRoles(['ROLE_CUSTOMER']);
-             */
+            $regyUser->setMessage($form->get('message')->getData());
 
             $entityManager->persist($regyUser);
             $entityManager->flush();

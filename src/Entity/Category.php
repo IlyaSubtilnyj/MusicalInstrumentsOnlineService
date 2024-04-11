@@ -7,22 +7,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Trait\DomainPropertyFromArrayTrait;
 
 #[ORM\Table(name: 'categories')]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNQ_ctg_name',columns: ["ctg_name"])]
 class Category
 {
-
-    use DomainPropertyFromArrayTrait;
-
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(name: 'ctg_id', type: 'integer')]
+    #[ORM\Column(name: 'ctg_id', type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column(name: 'ctg_name', type: 'string', length: 255)]
+    #[ORM\Column(name: 'ctg_name', type: Types::STRING, length: 50)]
     private ?string $name = null;
 
     #[ORM\Column(name: 'ctg_description', type: Types::TEXT, nullable: true)]
@@ -30,12 +26,6 @@ class Category
 
     #[ORM\OneToMany(targetEntity: Model::class, mappedBy: 'category')]
     private Collection $models;
-
-    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'categories')]
-    #[ORM\JoinTable(name: 'm2m_category_tags')]
-    #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'ctg_id')]
-    #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'tg_id')]
-    private Collection $tags;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'default_categories')]
     #[ORM\JoinTable(name: 'm2m_default_category_tags')]
@@ -49,7 +39,6 @@ class Category
     public function __construct()
     {
         $this->models = new ArrayCollection();
-        $this->tags = new ArrayCollection();
         $this->default_tags = new ArrayCollection();
         $this->metaCategorySpecs = new ArrayCollection();
     }
@@ -108,33 +97,6 @@ class Category
             if ($model->getCategory() === $this) {
                 $model->setCategory(null);
             }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Tag>
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tag $tag): static
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags->add($tag);
-            $tag->addCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tag $tag): static
-    {
-        if ($this->tags->removeElement($tag)) {
-            $tag->removeCategory($this);
         }
 
         return $this;

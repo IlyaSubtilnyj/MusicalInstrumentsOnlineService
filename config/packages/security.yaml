@@ -43,6 +43,7 @@ security:
         - { path: ^/profile, roles: ROLE_CUSTOMER }
 
     role_hierarchy:
+        ROLE_CUSTOMER:      ROLE_OPPRESSED
         ROLE_SALESPERSON:   ROLE_CUSTOMER
         ROLE_MODERATOR:     ROLE_SALESPERSON
         ROLE_ADMIN:         ROLE_MODERATOR
