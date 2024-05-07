@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-05-07T02:39:21.383Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" etag="xNvDsizfg2zlFjA79-y5" version="24.3.1" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-07T06:28:23.232Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" etag="I6NVPHmAS9ypnOwThivf" version="24.3.1" type="github">
   <diagram name="Page-1" id="e56a1550-8fbb-45ad-956c-1786394a9013">
-    <mxGraphModel dx="4734" dy="3098" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" background="none" math="0" shadow="0">
+    <mxGraphModel dx="4495" dy="2972" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -367,7 +367,7 @@
             <mxRectangle width="50" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="NHdadTuBNZMEaG2oG-7Y-429" value="status_id SMALLINT " style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;horizontal=1;" parent="NHdadTuBNZMEaG2oG-7Y-427" vertex="1">
+        <mxCell id="NHdadTuBNZMEaG2oG-7Y-429" value="bkng_status_id SMALLINT " style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;horizontal=1;" parent="NHdadTuBNZMEaG2oG-7Y-427" vertex="1">
           <mxGeometry x="50" width="310" height="30" as="geometry">
             <mxRectangle width="310" height="30" as="alternateBounds" />
           </mxGeometry>
